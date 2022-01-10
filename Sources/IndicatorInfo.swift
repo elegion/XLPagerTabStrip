@@ -30,6 +30,7 @@ public struct IndicatorInfo {
     public var image: UIImage?
     public var highlightedImage: UIImage?
     public var accessibilityLabel: String?
+    public var counterValue: Int?
     public var userInfo: Any?
     
     public init(title: String?) {
@@ -58,7 +59,24 @@ public struct IndicatorInfo {
         self.highlightedImage = highlightedImage
         self.userInfo = userInfo
     }
-
+    
+    public init(title: String?,
+                accessibilityLabel:String? = nil,
+                image: UIImage? = nil,
+                highlightedImage: UIImage? = nil,
+                counterValue: Int? = nil,
+                userInfo: Any? = nil) {
+        self.title = title
+        self.accessibilityLabel = accessibilityLabel
+        self.image = image
+        self.highlightedImage = highlightedImage
+        if let counterValue = counterValue {
+            self.counterValue = counterValue > .zero ? counterValue : nil
+        } else {
+            self.counterValue = nil
+        }
+        self.userInfo = userInfo
+    }
 }
 
 extension IndicatorInfo : ExpressibleByStringLiteral {
