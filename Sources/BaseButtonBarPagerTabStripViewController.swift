@@ -348,5 +348,6 @@ open class ExampleBaseButtonBarPagerTabStripViewController: BaseButtonBarPagerTa
         if let highlightedImage = indicatorInfo.highlightedImage {
             cell.imageView.highlightedImage = highlightedImage
         }
+        cell.counterValue = indicatorInfo.counterValue
     }
 }

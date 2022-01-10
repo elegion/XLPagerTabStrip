@@ -29,12 +29,23 @@ open class ButtonBarViewCell: UICollectionViewCell {
 
     @IBOutlet open var imageView: UIImageView!
     @IBOutlet open var label: UILabel!
-
+    @IBOutlet open var counterLabel: UILabel!
+    
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         isAccessibilityElement = true
         accessibilityTraits.insert([.button, .header])
+    }
+    
+    
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        counterLabel.layer.cornerRadius = counterLabel.frame.size.height / 2
+        counterLabel.clipsToBounds = true
+        counterLabel.font = .systemFont(ofSize: 11, weight: .medium)
+        counterLabel.textColor = .white
     }
     
     open override var isSelected: Bool {
@@ -50,4 +61,37 @@ open class ButtonBarViewCell: UICollectionViewCell {
             }
         }
     }
+    
+    open var counterValue: Int? {
+        didSet {
+            if let counterValue = counterValue, counterValue > .zero {
+                counterLabel.isHidden = false
+                counterLabel.text = "\(counterValue)"
+            } else {
+                counterLabel.isHidden = true
+            }
+        }
+    }
+}
+
+class PaddingLabel: UILabel {
+
+   @IBInspectable var topInset: CGFloat = 5.0
+   @IBInspectable var bottomInset: CGFloat = 5.0
+   @IBInspectable var leftInset: CGFloat = 5.0
+   @IBInspectable var rightInset: CGFloat = 5.0
+
+   override func drawText(in rect: CGRect) {
+      let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+       super.drawText(in: rect.inset(by: insets))
+   }
+
+   override var intrinsicContentSize: CGSize {
+      get {
+         var contentSize = super.intrinsicContentSize
+         contentSize.height += topInset + bottomInset
+         contentSize.width += leftInset + rightInset
+         return contentSize
+      }
+   }
 }
