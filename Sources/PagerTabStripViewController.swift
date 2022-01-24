@@ -147,6 +147,10 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
     open override var shouldAutomaticallyForwardAppearanceMethods: Bool {
         return false
     }
+    
+    open func numberOfControllersForWidthCount() -> Int {
+        (pagerTabStripChildViewControllersForScrolling ?? viewControllers).count
+    }
 
     open func moveToViewController(at index: Int, animated: Bool = true) {
         guard isViewLoaded && view.window != nil && currentIndex != index else {
@@ -236,7 +240,7 @@ open class PagerTabStripViewController: UIViewController, UIScrollViewDelegate {
         lastSize = containerView.bounds.size
 
         let pagerViewControllers = pagerTabStripChildViewControllersForScrolling ?? viewControllers
-        containerView.contentSize = CGSize(width: containerView.bounds.width * CGFloat(pagerViewControllers.count), height: containerView.contentSize.height)
+        containerView.contentSize = CGSize(width: containerView.bounds.width * CGFloat(numberOfControllersForWidthCount()), height: containerView.contentSize.height)
 
         for (index, childController) in pagerViewControllers.enumerated() {
             let pageOffsetForChild = self.pageOffsetForChild(at: index)
