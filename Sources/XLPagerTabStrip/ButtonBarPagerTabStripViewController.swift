@@ -116,12 +116,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
             let labelSize = label.intrinsicContentSize
             let counterSize: CGFloat
             if let counterValue = childItemInfo.counterValue {
-                let counterLabel = UILabel()
-                counterLabel.translatesAutoresizingMaskIntoConstraints = false
-                counterLabel.font = self?.settings.style.counterBarItemFont
-                counterLabel.text = "\(counterValue)"
-                let counterLabelSize = counterLabel.intrinsicContentSize.width
-                counterSize = counterLabelSize + 4 * 2 + 8
+                counterSize = (12 + 4) * 2
             } else {
                 counterSize = .zero
             }
