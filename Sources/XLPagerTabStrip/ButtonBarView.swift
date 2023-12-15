@@ -188,6 +188,5 @@ open class ButtonBarView: UICollectionView {
         super.layoutSubviews()
         
         updateSelectedBarYPosition()
-        updateSelectedBarPosition(false, swipeDirection: .none, pagerScroll: .no)
     }
 }
