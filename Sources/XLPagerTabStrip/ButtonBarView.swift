@@ -186,6 +186,8 @@ open class ButtonBarView: UICollectionView {
 
     override open func layoutSubviews() {
         super.layoutSubviews()
+        
         updateSelectedBarYPosition()
+        updateSelectedBarPosition(false, swipeDirection: .none, pagerScroll: .no)
     }
 }
